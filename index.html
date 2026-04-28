@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cravings Restaurant &amp; Bar | Port Harcourt</title>
+    <meta name="description" content="Premium dining, cocktails, lounge &amp; catering in Port Harcourt. Experience fine continental cuisine, vibrant nightlife, and exceptional events at Cravings.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --red: #e30613;
+            --dark-red: #b71c1c;
+            --deep-black: #0f0c08;
+            --cream: #f8f4ed;
+            --gold: #d4af88;
+            --text-light: #f8f4ed;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            background-color: var(--deep-black);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 12, 8, 0.98);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(227, 6, 19, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .logo {
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        .cta-nav {
+            background: var(--red);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-nav:hover {
+            background: #ff1a26;
+            transform: translateY(-2px);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            min-height: 820px;
+            background: linear-gradient(rgba(15,12,8,0.75), rgba(15,12,8,0.85)), 
+                        url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5%;
+            text-align: center;
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(227,6,19,0.15);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(227,6,19,0.4);
+            animation: fadeIn 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 680px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 1s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: rgba(15, 12, 8, 0.98);
+            padding: 22px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            align-items: center;
+            border-bottom: 1px solid rgba(227, 6, 19, 0.25);
+            animation: slideUp 1s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Sections */
+        .section {
+            padding: 110px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--red);
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #1a1410;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(60px);
+            border: 1px solid rgba(227,6,19,0.1);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(227, 6, 19, 0.18);
+            border-color: var(--red);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Menu Items */
+        .menu-item {
+            background: #1a1410;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: scale(0.95);
+            border: 1px solid rgba(227,6,19,0.1);
+        }
+
+        .menu-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--red);
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: #1a1410;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 6px solid var(--red);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .testimonial.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s ease;
+        }
+
+        .btn-red {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-red:hover {
+            background: #ff1a26;
+            transform: scale(1.08);
+        }
+
+        .map-container {
+            height: 460px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        footer {
+            background: #0a0704;
+            padding: 80px 5% 40px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            Cravings
+        </a>
+        <ul class="nav-links">
+            <li><a href="#dining">Dining</a></li>
+            <li><a href="#bar">Bar &amp; Lounge</a></li>
+            <li><a href="#catering">Catering</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="https://wa.me/2347052817088" target="_blank" class="cta-nav">
+            <i class="fab fa-whatsapp"></i> Reserve Now
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star" style="color: var(--red);"></i>
+                <span>4.0 ★ from 300+ Google Reviews • Port Harcourt</span>
+            </div>
+            <h1>Where Flavour Meets Atmosphere</h1>
+            <p>Premium restaurant, vibrant bar &amp; lounge, and exceptional catering services in the heart of Port Harcourt.</p>
+            
+            <div class="hero-ctas">
+                <a href="#contact" class="btn btn-red">
+                    <i class="fas fa-calendar-check"></i> Reserve Your Table
+                </a>
+                <a href="https://wa.me/2347052817088" target="_blank" class="btn" style="background:transparent; color:white; border:2px solid white;">
+                    <i class="fab fa-whatsapp"></i> Book via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-item">
+            <i class="fas fa-star" style="color: var(--red);"></i>
+            <div><strong>4.0 / 5.0</strong><br><small>300+ Google Reviews</small></div>
+        </div>
+        <div class="trust-item">
+            <i class="fas fa-map-marker-alt" style="color: var(--red);"></i>
+            <div>Elelenwo / GRA Axis, Port Harcourt</div>
+        </div>
+        <div class="trust-item">
+            <i class="fas fa-clock" style="color: var(--red);"></i>
+            <div>Open Daily<br><strong>11:00 AM – 12:00 Midnight</strong></div>
+        </div>
+        <div class="trust-item">
+            <i class="fas fa-utensils" style="color: var(--red);"></i>
+            <div>Dining • Bar • Lounge • Catering • Events</div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="section" style="background: #1a1410;" id="about">
+        <div style="max-width:900px; margin:0 auto; text-align:center;">
+            <h2 class="section-title">Your Ultimate Social Dining Destination</h2>
+            <p style="font-size:1.35rem; opacity:0.9;">
+                Cravings Restaurant &amp; Bar brings together exceptional food, crafted cocktails, 
+                lively conversations, and unforgettable moments in Port Harcourt.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="dining" class="section">
+        <h2 class="section-title">Our Experiences</h2>
+        <p class="section-subtitle" style="color:#ddd;">Four distinct ways to enjoy Cravings</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://picsum.photos/id/292/800/600" alt="Fine Dining at Cravings">
+                <div style="padding:32px;">
+                    <h3 style="color:var(--red);">Dining Experience</h3>
+                    <p>Continental and intercontinental cuisine served in a refined yet relaxed setting.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <img src="https://picsum.photos/id/870/800/600" alt="Bar &amp; Lounge">
+                <div style="padding:32px;">
+                    <h3 style="color:var(--red);">Bar &amp; Lounge</h3>
+                    <p>Crafted cocktails, fine wines, and vibrant nightlife atmosphere.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <img src="https://picsum.photos/id/201/800/600" alt="Catering Services">
+                <div style="padding:32px;">
+                    <h3 style="color:var(--red);">Catering &amp; Events</h3>
+                    <p>Professional catering for weddings, corporate events, and private parties.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <img src="https://picsum.photos/id/133/800/600" alt="Delivery">
+                <div style="padding:32px;">
+                    <h3 style="color:var(--red);">Convenience Services</h3>
+                    <p>Food delivery, takeaway, and easy table reservations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Menu -->
+    <section id="menu" class="section" style="background: #1a1410;">
+        <h2 class="section-title">Signature Highlights</h2>
+        <p class="section-subtitle" style="color:#ddd;">A taste of what awaits you</p>
+        
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="menu-item">
+                <img src="https://picsum.photos/id/431/600/400" alt="Grilled Tiger Prawns">
+                <div style="padding:24px;">
+                    <h4>Grilled Tiger Prawns</h4>
+                    <p style="opacity:0.8;">With garlic butter &amp; herbs</p>
+                    <p style="color:var(--red); font-weight:600; margin-top:8px;">₦18,500</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://picsum.photos/id/670/600/400" alt="Passion Martini">
+                <div style="padding:24px;">
+                    <h4>Signature Passion Martini</h4>
+                    <p style="opacity:0.8;">Our most loved cocktail</p>
+                    <p style="color:var(--red); font-weight:600; margin-top:8px;">₦7,500</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://picsum.photos/id/292/600/400" alt="Black Angus Ribeye">
+                <div style="padding:24px;">
+                    <h4>Black Angus Ribeye</h4>
+                    <p style="opacity:0.8;">With truffle mash</p>
+                    <p style="color:var(--red); font-weight:600; margin-top:8px;">₦28,000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: #1a1410;">
+        <h2 class="section-title">What Our Guests Say</h2>
+        
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));">
+            <div class="testimonial">
+                <div style="color:var(--red); font-size:1.6rem; margin-bottom:16px;">★★★★☆</div>
+                <p>"The best grilled fish in Port Harcourt! The ambiance is perfect for every occasion."</p>
+                <p style="margin-top:25px; font-weight:600;">— Chinedu O.</p>
+            </div>
+            <div class="testimonial">
+                <div style="color:var(--red); font-size:1.6rem; margin-bottom:16px;">★★★★★</div>
+                <p>"Their cocktails are exceptional. The lounge atmosphere on Friday nights is unmatched."</p>
+                <p style="margin-top:25px; font-weight:600;">— Adaora M.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <h2 style="font-size: 2.8rem; margin-bottom: 30px; color: var(--red);">Visit Cravings</h2>
+                <p style="font-size: 1.25rem;">Elelenwo / GRA Axis, Port Harcourt, Rivers State</p>
+                <p style="margin: 30px 0;"><strong>Open Daily:</strong> 11:00 AM – 12:00 Midnight</p>
+                
+                <a href="https://wa.me/2347052817088" target="_blank" class="btn btn-red" style="font-size:1.2rem; padding:18px 45px;">
+                    <i class="fab fa-whatsapp"></i> Reserve via WhatsApp
+                </a>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.5!2d7.05!3d4.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDUxJzAwLjAiTiA3wrAzMycwMC4wIkU!5e0!3m2!1sen!2sng!4v1710000000000" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Animations
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            const serviceCards = document.querySelectorAll('.service-card');
+            const menuItems = document.querySelectorAll('.menu-item');
+            const testimonials = document.querySelectorAll('.testimonial');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            sections.forEach(section => observer.observe(section));
+            
+            serviceCards.forEach((card, index) => {
+                setTimeout(() => observer.observe(card), index * 150);
+            });
+
+            menuItems.forEach((item, index) => {
+                setTimeout(() => observer.observe(item), index * 200);
+            });
+
+            testimonials.forEach((testimonial, index) => {
+                setTimeout(() => observer.observe(testimonial), index * 250);
+            });
+        }
+
+        window.addEventListener('load', animateOnScroll);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
